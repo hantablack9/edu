@@ -1,0 +1,10 @@
+RAG++ course assignment
+
+Weave Evaluation Comparison dashboard URL:
+PASTE_THE_PUBLISHED_WEAVE_PROJECT_OR_EVALUATION_URL_HERE
+
+Evaluation coverage:
+- Retrieval IR metrics
+- LLM retrieval judge
+- Traditional response metrics
+- LLM correctness relevance and faithfulness judges
