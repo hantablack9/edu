@@ -41,7 +41,7 @@ def required(name: str) -> str:
 
 
 def json_result(text: str) -> dict[str, Any]:
-    match = re.search(r"\\{.*\\}", text.strip(), flags=re.S)
+    match = re.search(r"\{.*\}", text.strip(), flags=re.S)
     if not match:
         raise ValueError(f"Judge did not return JSON: {text[:200]}")
     return json.loads(match.group(0))
@@ -76,7 +76,7 @@ async def relevance_judge(output: dict[str, Any], question: str) -> float:
 
 @weave.op
 async def faithfulness_judge(output: dict[str, Any], question: str) -> float:
-    context = "\\n\\n".join(f"[{x.get('source', 'unknown')}] {x.get('text', '')}" for x in output.get("contexts", []))
+    context = "\n\n".join(f"[{x.get('source', 'unknown')}] {x.get('text', '')}" for x in output.get("contexts", []))
     result = await cohere_judge(
         "Judge whether every material answer claim is supported by the context. Return JSON only with score 0, 1, or 2 and reason. Use 2 for fully supported, 1 for mixed, 0 for unsupported or contradicted.",
         {"question": question, "context": context, "answer": output["answer"]},
